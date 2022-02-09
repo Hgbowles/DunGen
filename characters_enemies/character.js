@@ -14,8 +14,12 @@ class Character { // Object class for player characters
       this.maxHp = maxHp;
       this.armor = armor;
       this.damage = damage;
-      this.condition = null;
+      this.condition = "";
 
+   }
+
+   setCon(condition) {
+      this.condition = condition;
    }
 
    hurt(points) {
