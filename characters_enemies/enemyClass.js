@@ -23,15 +23,15 @@ class enemy {
       this.hp -= points;
    }
 
-   afflict(condition) {
-      Character.setCon(condition);
+   afflict(condition, character) {
+      character.setCon(condition);
    }
 
-   attack() {
+   attack(character) {
 
       let atk = Math.random() * 20;
       if (atk > Character.armor) {
-         Character.hurt(this.damage);
+         character.hurt(this.damage);
          console.log("Enemy hits for " + this.damage + " points of damage!");
          if (this.condition != null) {
             switch(this.condition) {

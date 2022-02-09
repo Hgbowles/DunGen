@@ -37,7 +37,7 @@ class Character { // Object class for player characters
    }
 
    condition_effect(condition) {
-      switch(conditon) {
+      switch(condition) {
          case "poison":
             this.hurt(3);
          case "prone":
@@ -46,7 +46,7 @@ class Character { // Object class for player characters
       }
    }
 
-   action(act) {
+   action(act, enemy) {
       switch(act) {
          case "Stand Up":
             if (this.condition == "prone") {
