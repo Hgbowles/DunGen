@@ -9,6 +9,9 @@ import (enemy);
 
 
 function main() {
+   let armor = 0;
+   let maxHP = 0;
+   let damage = 0;
    let opponent = new enemy("Ogre", 27, 16, 11);
 
    let name = prompt("What is your name, adventurer, that we might know who you are when you achieve greatness?", "Randall Peterson");
@@ -16,13 +19,13 @@ function main() {
    let pClass = prompt("What kind of adventurer are you? Are you a Mage, or are you a Knight?", "knight");
 
    if (pClass == "knight" || pClass == "Knight") {
-      let armor = 13;
-      let maxHP = 20;
-      let damage = 6;
+      armor = 13;
+      maxHP = 20;
+      damage = 6;
    } else if (pClass == "mage" || pClass == "Mage") {
-      let armor = 10;
-      let maxHP = 10;
-      let damage = 13
+      armor = 10;
+      maxHP = 10;
+      damage = 13
    }
 
    let hero = new Character(name, pClass, maxHP, armor, damage);
