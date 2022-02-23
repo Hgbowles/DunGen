@@ -5,7 +5,7 @@ This program is Inspired by Dungeons and Dragons and is written by Hunter Bowles
 
 class Character { // Object class for player characters
 
-   constructor(name, maxHp, armor, damage) { 
+   constructor(name, pClass, maxHp, armor, damage) { 
       /* user inputs determine the character's 
       name, max HP, armor, and damage output. 
       Condition starts null but may change under the right curcumstances. */
@@ -76,6 +76,6 @@ class Character { // Object class for player characters
       }
    }
 
-   
+   export(Character);
 
 }

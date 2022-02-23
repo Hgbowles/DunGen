@@ -46,4 +46,6 @@ class enemy {
       }
 
    }
+   export(enemy);
 }
+
