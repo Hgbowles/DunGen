@@ -42,7 +42,7 @@ function main() {
    }
 
    if (hero.hp > 0){
-      console.log("Congratulations! You defeated the Ogre!\n");
+      console.log("Congratulations, " + hero.name + "! You defeated the Ogre!\n");
       console.log("If this were the full game, you would be allowed to enter another room after collecting some Treasure or gaining EXP.\n");
       console.log("However, this is not a full game yet, so all you get is this message and a sense of accomplishment.\n");
    } else if (hero.hp <= 0){
