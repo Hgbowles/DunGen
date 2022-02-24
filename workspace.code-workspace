@@ -3,5 +3,8 @@
       {
          "path": "."
       }
-   ]
+   ],
+   "settings": {
+      "code-runner.runInTerminal": true
+   }
 }

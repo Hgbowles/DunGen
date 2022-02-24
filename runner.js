@@ -9,6 +9,9 @@ import (enemy);
 
 
 function main() {
+
+   console.log("running Demo\n");
+
    let armor = 0;
    let maxHP = 0;
    let damage = 0;
@@ -60,5 +63,3 @@ function main() {
 
 
 }
-
-main();
