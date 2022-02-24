@@ -60,3 +60,5 @@ function main() {
 
 
 }
+
+main();
