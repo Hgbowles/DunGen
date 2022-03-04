@@ -1,8 +1,7 @@
 /* Object Class to handle enemies and their special actions.
 WIll contain data such as condition affliction and and random generation, i think. */
 
-class enemy {
-   
+class Enemy {
    
    constructor(creatureType, maxHp, armor, damage) {
       this.type = creatureType;
@@ -15,11 +14,12 @@ class enemy {
          this.condition = "poison";
       } else if (creatureType == "minotaur") {
          this.condition = "prone";
-      
       }
    }
 
    hurt(points) {
+      console.log("Enemy takes " + points + " points of damage!\n");
+      console.log("Enemy has " + this.hp + " Hit Points remaining!\n");
       this.hp -= points;
    }
 
@@ -30,9 +30,9 @@ class enemy {
    attack(character) {
 
       let atk = Math.random() * 20;
-      if (atk > Character.armor) {
+      if (atk > character.armor) {
          character.hurt(this.damage);
-         console.log("Enemy hits for " + this.damage + " points of damage!");
+         //console.log("Enemy hits for " + this.damage + " points of damage!");
          if (this.condition != null) {
             switch(this.condition) {
                case "poison":
@@ -46,6 +46,7 @@ class enemy {
       }
 
    }
-   export(enemy);
+
 }
 
+module.exports = Enemy;

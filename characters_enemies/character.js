@@ -5,11 +5,11 @@ This program is Inspired by Dungeons and Dragons and is written by Hunter Bowles
 
 class Character { // Object class for player characters
 
-   constructor(name, pClass, maxHp, armor, damage) { 
+   constructor(heroName, maxHp, armor, damage) {
       /* user inputs determine the character's 
       name, max HP, armor, and damage output. 
       Condition starts null but may change under the right curcumstances. */
-      this.name = name;
+      this.name = heroName;
       this.hp = maxHp;
       this.maxHp = maxHp;
       this.armor = armor;
@@ -22,18 +22,23 @@ class Character { // Object class for player characters
       this.condition = condition;
    }
 
+   getHP() {
+      return this.hp;
+   }
+
    hurt(points) {
       this.hp -= points;
-      console.log("You took " + points + " points of damage!");
+      console.log("You took " + points + " points of damage!\n");
+      console.log("You have " + this.hp + " Hit Points remaining!\n");
       if (this.hp <= 0) {
-         this.conditon = death;
-         console.log("You have died! GAME OVER");
+         //this.conditon = death;
+         //console.log("You have died! GAME OVER");
       }
    }
 
    heal(points) {
       this.hp += points;
-      console.log("You healed for " + points + "points!");
+      console.log("You healed for " + points + " points!");
    }
 
    condition_effect(condition) {
@@ -48,13 +53,13 @@ class Character { // Object class for player characters
 
    action(act, enemy) {
       switch(act) {
-         case "Stand Up":
+         case "stand up":
             if (this.condition == "prone") {
                this.condition = null;
                this.armor *= 2;
                this.damage *= 2;
             }
-         case "Attack":
+         case "fight":
             let atk = Math.random();
             if (atk == 1.0) {
                console.log("Critical Hit!");
@@ -64,18 +69,17 @@ class Character { // Object class for player characters
             } else {
                console.log("Attack Missed!");
             }
-         case "Use Potion":
-            this.heal(5);
+         case "use potion":
+            //this.heal(5);
          case "Use Antidote":
             if (this.condition == "poison") {
                this.condition = null;
                console.log("Cured Poison!");
             }
-         case "Flee":
+         case "flee":
             // END the game.
       }
    }
-
-   export(Character);
-
 }
+
+module.exports = Character;
