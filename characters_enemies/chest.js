@@ -3,7 +3,7 @@
 class Chest {
 
    constructor() {
-
+      
    }
 
    constructor(item) {

@@ -19,7 +19,9 @@ class dunRoom {
    }
 
    generateRoom() { // creates a room based on the roomVal
-      if (this.roomVal <= 0.3) {
+      if (this.roomVal == 0) {
+         this.roomType = "start";
+      } else if (this.roomVal <= 0.3) {
          this.roomType = "treasure";
       } else if (this.roomVal <= 0.5) {
          this.roomType = "encounter";
@@ -41,7 +43,7 @@ class dunRoom {
       let puzzleType = Math.random();
 
       if (puzzleType <= 0.3) {
-         puzzleType = "riddl3"; // there will be a pool of riddles chosen randomly, the player must answer 3 correctly to pass (think like that part from The Hobbit)
+         puzzleType = "riddle"; // there will be a pool of riddles chosen randomly, the player must answer correctly to pass (think like that part from The Hobbit)
       } else if (puzzleType <= 0.6) {
          puzzleType = "numbers"; // there will be some simple number game, the player must win to pass
       } else {
@@ -81,6 +83,8 @@ class dunRoom {
 
       let numChests = Math.round(Math.random() * 5);
 
+      let numTrapped = Math.round(Math.random() * numChests);
+
 
 
    }
@@ -102,6 +106,27 @@ class dunRoom {
    keyRoomGen() {
       //
       let numChests = 1;
+   }
+
+   riddleGen() {
+      let riddleNum = Math.round(Math.random() * 4);
+      var riddleText = "";
+      var riddleAns = "";
+
+      switch(riddleNum) {
+         case 1:
+            riddleText = "I have towns without people, forests without trees, and rivers without water. What am I?";
+            riddleAns = "map";
+         case 2:
+            riddleText = "I am at the beginning of the end and the end of the before. What am I?";
+            riddleAns = "e";
+         case 3:
+            riddleText = "The more of me you take, the more you leave behind. What am I?";
+            riddleAns = "footsteps";
+         case 4:
+            riddleText = "Thirty white horses on a red hill. They tramp and they stamp, and then they stand still. What am I?";
+            riddleAns = "teeth";
+      }
    }
 
 
