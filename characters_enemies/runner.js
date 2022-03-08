@@ -47,7 +47,41 @@ function main() {
 
    // send adventurer to the start room
 
-   
+   let currRoom = map[playerX][playerY];
+
+   console.log("You find yourself in an empty room, with doors pointing east and south. \nThe doors are unlocked, but you are unable to see into either room without entering.\n");
+
+   while (hero.hp > 0){
+      let moved = false;
+
+      while (moved == false) {
+
+         let move = prompt("Which way would you like to go? Enter \"south\" or \"east\" to enter that room. ");
+
+         if (move.toLowerCase().trim() == "south" && currRoom.getSouth() != null){
+            currRoom = map[playerX++][playerY];
+            moved = true;
+         } else if (move.toLowerCase().trim() == "east" && currRoom.getEast() != null) {
+            currRoom = map[playerX][playerY++];
+            moved = true;
+         } else if (move.toLowerCase().trim() == "north" && currRoom.getNorth() != null) {
+            currRoom = map[playerX--][playerY];
+            moved = true;
+         } else if (move.toLowerCase().trim() == "west" && currRoom.getWest() != null) {
+            currRoom = map[playerX][playerY--];
+            moved = true;
+         } else {
+            console.log("Invalid movement direction, please try again.");
+         }
+      }
+
+      currRoom.generateRoom();
+
+
+
+
+
+   }
 
 }
 

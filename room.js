@@ -29,10 +29,21 @@ class dunRoom {
       this.neighborW = west;
    }
 
+   getSouth(){
+      return this.neighborS;
+   }
+   getEast(){
+      return this.neighborE;
+   }
+   getNorth(){
+      return this.neighborN;
+   }
+   getWest(){
+      return this.neighborW;
+   }
+
    generateRoom() { // creates a room based on the roomVal
-      if (this.roomVal == 0) {
-         this.roomType = "start";
-      } else if (this.roomVal <= 0.3) {
+      if (this.roomVal <= 0.3) {
          this.roomType = "treasure";
       } else if (this.roomVal <= 0.5) {
          this.roomType = "encounter";
