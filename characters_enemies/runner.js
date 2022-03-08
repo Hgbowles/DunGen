@@ -10,11 +10,7 @@ const Room = require('./room.js');
 
 const prompt = require('prompt-sync')();
 
-
-
-
-
-// start the demo
+// start the game
 function main() {
    var playerX = 0;
    var playerY = 0;
@@ -49,15 +45,7 @@ function main() {
    console.log("You will start the dungeon with your standard adventuring equipment according to your class, as well as 3 health potions, just in case.\n");
    console.log("Now, adventurer, your destiny awaits! Enter the RanDungeon and emerge victorious!\n\n");
 
-   // include files found in characters_enemies
-
-   // send adventurer to roomRunner
-
-   
-
-   //import {main} from './demo.js';
-
-   //main();
+   // send adventurer to the start room
 
    
 

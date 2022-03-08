@@ -2,6 +2,8 @@
 Object class to generate rooms, with random enemies, treasure, and/or puzzles.
 */
 
+const Enemy = require ('./enemyClass.js');
+
 class dunRoom {
 
    constructor(north, south, east, west){ // basic constructor, randomly generates room values
@@ -56,7 +58,7 @@ class dunRoom {
       } else if (puzzleType <= 0.6) {
          puzzleType = "numbers"; // there will be some simple number game, the player must win to pass
       } else {
-         puzzleType = "trivia?"; // unsure what this part will be, likely either trivia or something simple like that.
+         puzzleType = "TBD"; // unsure what this part will be, likely either trivia or something simple like that.
       }
       
    }
@@ -80,8 +82,7 @@ class dunRoom {
          enemyType = "animated armor";
       } 
 
-      // generate the number of enemies in the room
-      var numEnemies = Math.round(Math.random() * enemyWeight);
+      let enemy = new Enemy(enemyType);
 
    }
 
