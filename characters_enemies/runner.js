@@ -16,6 +16,19 @@ const prompt = require('prompt-sync')();
 
 // start the demo
 function main() {
+   var playerX = 0;
+   var playerY = 0;
+
+   let map = [ // a 3x5 2-D array of rooms, the starting room at [0][0], all other rooms are randomly generated.
+      [new Room("start", null, map[1][0], map[0][1], null), new Room(null, map[1][1], map[0][2], map[0][0]), new Room(null, map[1][2], null, map[0][1])],
+      [new Room(map[0][0], map[2][0], map[1][1], null), new Room(map[0][1], map[2][1], map[1][2], map[1][0]), new Room(map[0][2], map[2][2], null, map[1][1])],
+      [new Room(map[1][0], map[3][0], map[2][1], null), new Room(map[1][1], map[3][1], map[2][2], map[2][0]), new Room(map[1][2], map[3][2], null, map[2][1])],
+      [new Room(map[2][0], map[3][0], map[3][1], null), new Room(map[2][1], map[4][1], map[3][2], map[3][0]), new Room(map[2][2], map[4][2], null, map[3][1])],
+      [new Room(map[3][0], null, map[4][1], null), new Room(map[3][1], null, map[4][2], map[4][0]), new Room(map[3][2], null, null, map[4][1])]
+   ]; 
+
+// NEED TO IMPLEMENT BOSS AND KEY ROOM GENERATIONS
+
 
    let name = prompt("What is your name, adventurer, that we might know who you are when you achieve greatness? ");
 
@@ -37,6 +50,10 @@ function main() {
    console.log("Now, adventurer, your destiny awaits! Enter the RanDungeon and emerge victorious!\n\n");
 
    // include files found in characters_enemies
+
+   // send adventurer to roomRunner
+
+   
 
    //import {main} from './demo.js';
 

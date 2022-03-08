@@ -36,7 +36,25 @@ class Character { // Object class for player characters
       this.inventory.push(itemName);
    }
 
+   setWeapon(weapon){
+      switch(weapon) {
+         case 'greatsword':
+            this.damage = 18;
+         case 'longsword':
+            this.damage = 12;
+         case 'greataxe':
+            this.damage = 24;
+      }
+   }
 
+   setArmor(type){
+      switch(type) {
+         case 'chain':
+            this.armor = 16;
+         case 'plate':
+            this.armor = 19;
+      }
+   }
 
    hurt(points) {
       this.hp -= points;
