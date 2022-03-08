@@ -17,6 +17,7 @@ class Character { // Object class for player characters
       this.condition = "";
       this.inventory = ["health potion", "health potion", "health potion"];
       this.gold = 0;
+      this.hasKey = false;
 
    }
 

@@ -55,23 +55,27 @@ function main() {
       let moved = false;
 
       while (moved == false) {
+         if (currRoom.state == true) {
 
-         let move = prompt("Which way would you like to go? Enter \"south\" or \"east\" to enter that room. ");
+            let move = prompt("Which way would you like to go? Enter \"south\" or \"east\" to enter that room. ");
 
-         if (move.toLowerCase().trim() == "south" && currRoom.getSouth() != null){
-            currRoom = map[playerX++][playerY];
-            moved = true;
-         } else if (move.toLowerCase().trim() == "east" && currRoom.getEast() != null) {
-            currRoom = map[playerX][playerY++];
-            moved = true;
-         } else if (move.toLowerCase().trim() == "north" && currRoom.getNorth() != null) {
-            currRoom = map[playerX--][playerY];
-            moved = true;
-         } else if (move.toLowerCase().trim() == "west" && currRoom.getWest() != null) {
-            currRoom = map[playerX][playerY--];
-            moved = true;
+            if (move.toLowerCase().trim() == "south" && currRoom.getSouth() != null){
+               currRoom = map[playerX++][playerY];
+               moved = true;
+            } else if (move.toLowerCase().trim() == "east" && currRoom.getEast() != null) {
+               currRoom = map[playerX][playerY++];
+               moved = true;
+            } else if (move.toLowerCase().trim() == "north" && currRoom.getNorth() != null) {
+               currRoom = map[playerX--][playerY];
+               moved = true;
+            } else if (move.toLowerCase().trim() == "west" && currRoom.getWest() != null) {
+               currRoom = map[playerX][playerY--];
+               moved = true;
+            } else {
+               console.log("Invalid movement direction, please try again.");
+            }
          } else {
-            console.log("Invalid movement direction, please try again.");
+            console.log("It seems that the doors won't open yet, maybe there's something left to do here?");
          }
       }
 
