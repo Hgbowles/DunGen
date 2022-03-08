@@ -4,18 +4,27 @@ Object class to generate rooms, with random enemies, treasure, and/or puzzles.
 
 class dunRoom {
 
-   constructor(){ // basic constructor, randomly generates room values
+   constructor(north, south, east, west){ // basic constructor, randomly generates room values
       this.roomVal = Math.random();
-
+      this.neighborN = north; 
+      this.neighborS = south;
+      this.neighborE = east;
+      this.neighborW = west;
       this.roomType = "base";
    }
 
-   constructor(special) { //special constructor, only occurs once per room type
+   constructor(special, north, south, east, west) { //special constructor, only occurs once per room type
       if (special == "key") {
          this.roomVal = 2;
       } else if (special == "boss") {
          this.roomVal = 3;
+      } else if (special == "start") {
+         this.roomVal = 0;
       }
+      this.neighborN = north; //each room may have up to 4 neighbor rooms, but must have at least one neighbor.
+      this.neighborS = south;
+      this.neighborE = east;
+      this.neighborW = west;
    }
 
    generateRoom() { // creates a room based on the roomVal

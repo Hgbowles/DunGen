@@ -15,7 +15,8 @@ class Character { // Object class for player characters
       this.armor = armor;
       this.damage = damage;
       this.condition = "";
-      this.inventory = ["health potion", "health potion", "health potion"]
+      this.inventory = ["health potion", "health potion", "health potion"];
+      this.gold = 0;
 
    }
 
@@ -26,6 +27,16 @@ class Character { // Object class for player characters
    getHP() {
       return this.hp;
    }
+
+   addGold(val){
+      this.gold += val;
+   }
+
+   addItem(itemName){
+      this.inventory.push(itemName);
+   }
+
+
 
    hurt(points) {
       this.hp -= points;
