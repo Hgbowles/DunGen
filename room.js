@@ -7,7 +7,9 @@ const Enemy = require ('./enemyClass.js');
 class dunRoom {
 
    constructor(north, south, east, west){ // basic constructor, randomly generates room values
-      this.roomVal = Math.random();
+      //this.roomVal = Math.random();
+      //for the demo, the room is going to be of set types.
+      this.roomVal = 0.7;
       this.neighborN = north; 
       this.neighborS = south;
       this.neighborE = east;
