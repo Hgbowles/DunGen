@@ -63,10 +63,11 @@ console.log("\nrunning Demo\n");
             thisRoom.generateRoom(adventurer, enemy);
             moved = false;
             thisRoom.state = true;
+            if (dmap[0][0].state && dmap[0][1].state && dmap[1][0].state && dmap[1][1].state) {
+               gameEnd = true;
+            }
          }
-         if (dmap[0][0].state && dmap[0][1].state && dmap[1][0].state && dmap[1][1].state) {
-            gameEnd = true;
-         }
+         
       }
 
       console.log("\n\nI wish there was more here for you, now that you've finished this demo, but this is all I've got at the moment.\n");
