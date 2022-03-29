@@ -16,12 +16,28 @@ function main() {
    var playerY = 0;
 
    let map = [ // a 3x5 2-D array of rooms, the starting room at [0][0], all other rooms are randomly generated.
-      [new Room("start", null, map[1][0], map[0][1], null), new Room(null, map[1][1], map[0][2], map[0][0]), new Room(null, map[1][2], null, map[0][1])],
-      [new Room(map[0][0], map[2][0], map[1][1], null), new Room(map[0][1], map[2][1], map[1][2], map[1][0]), new Room(map[0][2], map[2][2], null, map[1][1])],
-      [new Room(map[1][0], map[3][0], map[2][1], null), new Room(map[1][1], map[3][1], map[2][2], map[2][0]), new Room(map[1][2], map[3][2], null, map[2][1])],
-      [new Room(map[2][0], map[3][0], map[3][1], null), new Room(map[2][1], map[4][1], map[3][2], map[3][0]), new Room(map[2][2], map[4][2], null, map[3][1])],
-      [new Room(map[3][0], null, map[4][1], null), new Room(map[3][1], null, map[4][2], map[4][0]), new Room(map[3][2], null, null, map[4][1])]
+      [sRoom, room1, room2],
+      [room3, room4, room5],
+      [room6, room7, room8],
+      [room9, room10, room11],
+      [room12, room13, room14]
    ]; 
+
+   let sRoom = new Room("start", null, map[1][0], map[0][1], null);
+   let room1 = new Room(null, map[1][1], map[0][2], map[0][0]);
+   let room2 = new Room(null, map[1][2], null, map[0][1]);
+   let room3 = new Room(map[0][0], map[2][0], map[1][1], null);
+   let room4 = new Room(map[0][1], map[2][1], map[1][2], map[1][0]);
+   let room5 = new Room(map[0][2], map[2][2], null, map[1][1]);
+   let room6 = new Room(map[1][0], map[3][0], map[2][1], null);
+   let room7 = new Room(map[1][1], map[3][1], map[2][2], map[2][0]);
+   let room8 = new Room(map[1][2], map[3][2], null, map[2][1])
+   let room9 = new Room(map[2][0], map[3][0], map[3][1], null);
+   let room10 = new Room(map[2][1], map[4][1], map[3][2], map[3][0]);
+   let room11 = new Room(map[2][2], map[4][2], null, map[3][1]);
+   let room12 = new Room(map[3][0], null, map[4][1], null);
+   let room13 = new Room(map[3][1], null, map[4][2], map[4][0]);
+   let room14 = new Room(map[3][2], null, null, map[4][1]);
 
 // NEED TO IMPLEMENT BOSS AND KEY ROOM GENERATIONS
 

@@ -90,6 +90,7 @@ class Character { // Object class for player characters
                this.armor *= 2;
                this.damage *= 2;
             }
+            break;
          case "fight":
             let atk = Math.random();
             if (atk == 1.0) {
@@ -100,17 +101,20 @@ class Character { // Object class for player characters
             } else {
                console.log("Attack Missed!");
             }
+            break;
          case "health potion":
             if (this.inventory.includes("health potion")){
                this.heal(5);
                this.inventory.indexOf("health potion") = '';
 
             }
+            break;
          case "Use Antidote":
             if (this.condition == "poison") {
                this.condition = null;
                console.log("Cured Poison!");
             }
+            break;
          case "flee":
             // END the game.
       }
