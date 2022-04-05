@@ -15,7 +15,7 @@ class Character { // Object class for player characters
       this.armor = armor;
       this.damage = damage;
       this.condition = "";
-      this.inventory = ["health potion", "health potion", "health potion"];
+      this.inventory = ["health potion", "health potion", "health potion", "antidote"];
       this.gold = 0;
       this.hasKey = false;
 
@@ -105,14 +105,15 @@ class Character { // Object class for player characters
          case "health potion":
             if (this.inventory.includes("health potion")){
                this.heal(5);
-               this.inventory.indexOf("health potion") = '';
+               this.inventory.splice(this.inventory.indexOf("health potion"), this.inventory.indexOf("health potion")) ;
 
             }
             break;
-         case "Use Antidote":
-            if (this.condition == "poison") {
+         case "use antidote":
+            if (this.condition == "poison" && this.inventory.includes("antidote")) {
                this.condition = null;
                console.log("Cured Poison!");
+               this.inventory.splice(this.inventory.indexOf("antidote"), this.inventory.indexOf("antidote"));
             }
             break;
          case "flee":
