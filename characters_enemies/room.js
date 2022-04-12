@@ -2,6 +2,7 @@
 Object class to generate rooms, with random enemies, treasure, and/or puzzles.
 */
 
+const Chest = require('./chest.js');
 const Enemy = require ('./enemyClass.js');
 const prompt = require('prompt-sync')();
 
@@ -116,16 +117,73 @@ class dunRoom {
       // Random number of chests, chests may be trapped (tripwire, Mimic, poison dart, etc.)
 
       let numChests = Math.round(Math.random() * 5);
+      var curChest;
 
       let numTrapped = Math.round(Math.random() * numChests);
+      let numSafe = numChests - numTrapped;
 
-      console.log("This room will be the treasure room, once an inventory is developed properly.\n");
-      console.log("As for now, the room has " + numChests + " chests in it, and " + numTrapped + " of them are trapped.");
+      console.log("You enter a room with some chests...\n");
+      console.log("As for now, the room has " + numChests + " chests in it.\n");
+      var action = '';
+      while (action.toLowerCase().trim() != 'exit' && numChests > 0) {
+         action = prompt("What would you like to do? Will you search the chests or exit the room? ");
+         if (action.toLowerCase().trim() == 'search') {
+            let chestVal = (Math.random() * 10) % 2;
 
-      console.log("for now, the room will say you have completed it, carry on.\n");
+            if (chestVal == 0 && numSafe > 0 || numTrapped == 0) {
+               curChest = new Chest(false);
+               numSafe--;
+               numChests--;
 
+            } else if (chestVal == 1 && numTrapped > 0 || numSafe == 0) {
+               curChest = new Chest(true);
+               numTrapped--;
+               numChests--;
+            }
 
+            var checkDanger = prompt("Will you check for traps? Y or N ");
+            if (checkDanger.toLowerCase().trim() == 'y') {
+               var checkRoll = Math.random() * 20;
+               if (checkRoll > 10) {
+                  if (curChest.trap) {
+                     console.log("This chest is definitely trapped!");
+                  } else {
+                     console.log("This chest is definitely safe!");
+                  }
+               } else {
+                  if (curChest.trap) {
+                     console.log("You're pretty sure that chest is safe, I think?");
+                  } else {
+                     console.log("Now I'm no expert, but that chest looks like it may or may not be containing a trap of some variety.");
+                  }
+               }
+            }
+            var openChest = prompt("Would you like to open the chest? Y or N ");
+            if (openChest.toLowerCase().trim() == 'y') {
+               if (curChest.trap) {
+                  // activates trap, probably a small dart trap or something like that that does a little damage
+               } 
+               curChest.contents();
+               var loot = prompt("Will you take the items in the chest? Y or N ");
+               if (loot.toLowerCase().trim() == 'y') {
+                  for (let i = 0; i < curChest.healPots; i++) {
+                     hero.addItem("health potion");
+                  }
+                  for (let i = 0; i < curChest.antPot; i++) {
+                     hero.addItem("antidote");
+                  }
+                  hero.addGold(curChest.gold);
 
+                  console.log("You took the loot from the chest!");
+                  console.log("There are " + numChests + " chests remaining, if you wish to check them.");
+               }
+            }
+         } else if (action.toLowerCase().trim() == 'exit') {
+            console.log("Very well, you may proceed. The doors to the room are unlocked.");
+         }
+      }
+
+      console.log("You may now proceed to another room, this room is complete.\n");
    }
 
 

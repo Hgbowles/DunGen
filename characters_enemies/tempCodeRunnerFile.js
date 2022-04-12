@@ -1,1 +1,1 @@
-null
+const Enemy = require('./enemyClass.js');
