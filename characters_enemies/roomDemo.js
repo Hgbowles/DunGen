@@ -29,10 +29,12 @@ var moved = false;
 // Begin the Demo
 console.log("\nrunning Demo\n");
 
+console.log("\n\nTo demonstrate the inventory system, the starting inventory of the player is: " + adventurer.inventory + "\n\n");
+
    while (!gameEnd) {
          if (!moved) {
 
-            let move = prompt("Which way would you like to go? Enter a direction to enter that room. \n");
+            let move = prompt("Which way would you like to go? Enter a direction to enter that room. ");
             console.log("Previous Room coordinates: " + playX + ", " + playY);
             console.log("\n");
 
@@ -70,7 +72,7 @@ console.log("\nrunning Demo\n");
          
       }
 
-      console.log("\n\nTo demonstrate the inventory's correctness, the current inventory of the player is: " + adventurer.inventory + "\n\n");
+      console.log("\n\nTo demonstrate the inventory system, the final inventory of the player is: " + adventurer.inventory + "\n\n");
 
       console.log("\n\nI wish there was more here for you, now that you've finished this demo, but this is all I've got at the moment.\n");
       console.log("Don't worry, more will be out soon, by next week I want to start adding in the randomizers to the things, and try using the bigger map in runner.js.\n");

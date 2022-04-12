@@ -147,6 +147,16 @@ class dunRoom {
                if (checkRoll > 10) {
                   if (curChest.trap) {
                      console.log("This chest is definitely trapped!");
+                     let disarm = prompt("Would you like to attempt to disarm the chest? Y or N ");
+                     if (disarm.toLowerCase().trim() == 'y') {
+                        let sleightOfHand = Math.random() * 20;
+                        if (slieghtOfHand > 13) {
+                           curChest.trap = false;
+                           console.log("You disarmed the trap!");
+                        } else {
+                           console.log("Despite your best efforts, this trap was too elaborate for you to disarm safely.")
+                        }
+                     }
                   } else {
                      console.log("This chest is definitely safe!");
                   }
@@ -162,6 +172,8 @@ class dunRoom {
             if (openChest.toLowerCase().trim() == 'y') {
                if (curChest.trap) {
                   // activates trap, probably a small dart trap or something like that that does a little damage
+                  console.log("As you open the chest, a spike trap triggers!\n")
+                  hero.hurt(5);
                } 
                curChest.contents();
                var loot = prompt("Will you take the items in the chest? Y or N ");
