@@ -14,11 +14,12 @@ class Chest {
 
    contents() {
       if (this.trap) {
-         this = new Enemy("Mimic", 10, 13, 5);
+         //this = new Enemy("Mimic", 10, 13, 5);
+         console.log("As you open the chest, you hear a slight *click* and a trap that is there gets triggered.");
       } else {
-         this.gold = Math.random() * 10 + Math.random() * 100 + Math.random() * 1000;
-         this.healPots = Math.random() * 10;
-         this.antPot = Math.random() * 10;
+         this.gold = Math.floor(Math.random() * 10 + Math.random() * 100 + Math.random() * 1000);
+         this.healPots = Math.floor(Math.random() * 10);
+         this.antPot = Math.floor(Math.random() * 10);
 
          console.log("As you open the chest, you find %d gold pieces, %d health potions, and %d antidotes", this.gold, this.healPots, this.antPot);
       }

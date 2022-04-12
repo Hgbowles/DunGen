@@ -70,6 +70,8 @@ console.log("\nrunning Demo\n");
          
       }
 
+      console.log("\n\nTo demonstrate the inventory's correctness, the current inventory of the player is: " + adventurer.inventory + "\n\n");
+
       console.log("\n\nI wish there was more here for you, now that you've finished this demo, but this is all I've got at the moment.\n");
       console.log("Don't worry, more will be out soon, by next week I want to start adding in the randomizers to the things, and try using the bigger map in runner.js.\n");
       console.log("But yeah that's the current demo for RanDungeon, your Randomized Dungeon Crawler Experience");

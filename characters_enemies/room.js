@@ -48,7 +48,7 @@ class dunRoom {
       
       if (this.roomVal <= 0.3) {
          this.roomType = "treasure";
-         this.treasureGen();
+         this.treasureGen(hero);
       } else if (this.roomVal <= 0.5) {
          this.roomType = "encounter";
          //this.combatGen(Math.random());
@@ -111,7 +111,7 @@ class dunRoom {
 
    }
 
-   treasureGen() {
+   treasureGen(hero) {
       // generates the treasure and value in the room
       // Treasure will have a score value, to increase a player's final score
       // Random number of chests, chests may be trapped (tripwire, Mimic, poison dart, etc.)
