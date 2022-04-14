@@ -200,11 +200,11 @@ class dunRoom {
 
 
    libraryLootGen() {
-      // generates inventory loot for Mages (spell scrolls, potions, etc.)
+      // generates inventory loot for Mages (spell scrolls, magic buffs, etc.)
    }
 
    armoryLootGen() {
-      // generates inventory loot for Knights (weapons, armor, potions, etc.)
+      // generates inventory loot for Knights (weapons, armor, physical buffs, etc.)
    }
 
    bossRoomGen() {

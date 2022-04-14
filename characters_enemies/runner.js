@@ -49,10 +49,8 @@ function main() {
    var hero;
 
    if (pClass.toLowerCase().trim() == "knight") {
-      console.log("howdy");
       hero = new Player(name, 20, 13, 6);
    } else if (pClass.toLowerCase().trim() == "mage") {
-    
       hero = new Player(name, 10, 10, 13);
    }
 
@@ -73,7 +71,7 @@ function main() {
       while (moved == false) {
          if (currRoom.state == true) {
 
-            let move = prompt("Which way would you like to go? Enter \"south\" or \"east\" to enter that room. ");
+            let move = prompt("Which way would you like to go? Enter a direction to enter that room. You can also check the map if you want by entering \"MAP\"." );
 
             if (move.toLowerCase().trim() == "south" && currRoom.getSouth() != null){
                currRoom = map[playerX++][playerY];
@@ -87,8 +85,20 @@ function main() {
             } else if (move.toLowerCase().trim() == "west" && currRoom.getWest() != null) {
                currRoom = map[playerX][playerY--];
                moved = true;
+            } else if (move.toLowerCase().trim() == "map") {
+               for (let i = 0; i < map.length; i++) {
+                  for (let j = 0; j < map[0].length; j++) {
+                     if (playerX == j && playerY == i) {
+                        console.log("[X]");
+                     } else {
+                        console.log("[ ]");
+                     }
+                     console.log("\n");
+                  }
+               }
+               console.log("\nX = You Are Here");
             } else {
-               console.log("Invalid movement direction, please try again.");
+               console.log("Invalid input, please try again.");
             }
          } else {
             console.log("It seems that the doors won't open yet, maybe there's something left to do here?");
