@@ -15,8 +15,6 @@ class dunRoom {
          this.roomVal = 2;
       } else if (special == "boss") {
          this.roomVal = 3;
-      } else if (special == "start") {
-         this.roomVal = 0;
       } else {
          this.roomVal = special; // provide a Math.random() number
       }
@@ -46,7 +44,7 @@ class dunRoom {
 
       console.log(this.roomVal);
       
-      if (this.roomVal <= 0.3) {
+      if (this.roomVal <= 0.2) {
          this.roomType = "treasure";
          this.treasureGen(hero);
       } else if (this.roomVal <= 0.5) {
@@ -75,7 +73,7 @@ class dunRoom {
       // generates a variety of simple puzzles/riddles to unlock the next rooms
       //let puzzleType = Math.random();
 
-      let puzzleType = 0.3;
+      let puzzleType = Math.random();
 
       if (puzzleType <= 0.3) {
          puzzleType = "riddle"; // there will be a pool of riddles chosen randomly, the player must answer correctly to pass (think like that part from The Hobbit)
@@ -199,19 +197,48 @@ class dunRoom {
    }
 
 
-   libraryLootGen() {
+   libraryLootGen(hero) {
       // generates inventory loot for Mages (spell scrolls, magic buffs, etc.)
+      console.log("As you enter the next room, you see towering bookshelves all around you. In the center of the room is a table with glowing runes. It appears you have found an arcane library!");
+      if (hero.getClass() == "mage") {
+         console.log("I bet you could get a lot stronger if you read some of the books in the library...\n");
+         let buffYN = prompt("Will you take some time to get stronger? Y or N ");
+         if (buffYN.toLowerCase().trim() == "y") {
+            console.log("As you read the books around you, you can feel the magical energy flowing through you, and you can feel it becoming greater than before!\n");
+            hero.buff(50, 20, 5);
+            console.log("Your hp, damage, and armor have all increased!");
+         }
+      } else {
+         console.log("The books here look pretty neat, but I don't think you'd learn anything from it.\n");
+      }
    }
 
-   armoryLootGen() {
+   armoryLootGen(hero) {
       // generates inventory loot for Knights (weapons, armor, physical buffs, etc.)
+      console.log("As you walk into the next room, the light of torches reflects off rows of armor and weapons, all new and shiny and waiting for an adventurer to take them. You found an armory!\n");
+      if (hero.getClass() == "knight") {
+         console.log("You know, you'd probably get a lot stronger if you took some of the gear here...\n");
+         let buffYN = prompt("Will you take some time to get stronger? Y or N ");
+         if (buffYN.toLowerCase().trim() == "y") {
+            console.log("As you look around the armory, you find some new armor and a grindstone to sharpen your sword!\n");
+            hero.buff(80, 25, 5);
+            console.log("Your hp, damage, and armor have all increased!");
+         } 
+      } else {
+         console.log("The stuff in here sure is shiny, but martial weapons aren't really your style.\n");
+      }
    }
 
-   bossRoomGen() {
+   bossRoomGen(hero) {
       console.log("As you enter the next room, you see before you a giant fire-breathing dragon atop a mountain of gold. It looks down at you and roars mightily.\n");
       console.log("I hope you're ready, adventurer. The dragon surely is.\n");
       let boss = new Enemy("dragon", 150, 17, 20);
       let bossTreasure = 50000;
+      this.combat(hero, boss);
+      if (hero.hp > 0) {
+         console.log("To the winner go the spoils, you collect the gold from the dragon's hoard, about 50000 pieces in total.\n");
+         hero.addGold(50000);
+      }
    }
 
    combat(hero, monster) {

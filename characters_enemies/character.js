@@ -5,11 +5,12 @@ This program is Inspired by Dungeons and Dragons and is written by Hunter Bowles
 
 class Character { // Object class for player characters
 
-   constructor(heroName, maxHp, armor, damage) {
+   constructor(heroName, heroClass, maxHp, armor, damage) {
       /* user inputs determine the character's 
       name, max HP, armor, and damage output. 
       Condition starts null but may change under the right curcumstances. */
       this.name = heroName;
+      this.class = heroClass;
       this.hp = maxHp;
       this.maxHp = maxHp;
       this.armor = armor;
@@ -19,6 +20,17 @@ class Character { // Object class for player characters
       this.gold = 0;
       this.hasKey = false;
 
+   }
+
+   getClass() {
+      return this.getClass;
+   }
+
+   buff(hPlus, dPlus, aPlus) {
+      this.maxHp += hPlus;
+      this.hp = this.maxHp;
+      this.damage += dPlus;
+      this.armor += aPlus;
    }
 
    setCon(condition) {
