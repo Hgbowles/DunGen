@@ -243,13 +243,15 @@ class dunRoom {
 
    combat(hero, monster) {
       var fled = false;
+
+      console.log("An angry " + monster.type + " attacks! Combat START!");
       while(hero.hp > 0 && monster.hp > 0) {
          let act = prompt("What will you do, hero? You can FIGHT, USE ITEM, or FLEE ");
             if (act.toLowerCase().trim() == "flee"){
                monster.hurt(1000);
                fled = true;
             } else {
-      
+               
                hero.action(act, monster);
       
                console.log("The " + monster.type + " attacks!");

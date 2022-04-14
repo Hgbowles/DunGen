@@ -106,12 +106,13 @@ class Character { // Object class for player characters
          case "fight":
             let atk = Math.random();
             if (atk == 1.0) {
-               console.log("Critical Hit!");
+               console.log("Critical Hit!\n");
                enemy.hurt(this.damage * 2);
             } else if (atk * 20 >= enemy.armor) {
+               console.log("Direct hit!\n");
                enemy.hurt(this.damage);
             } else {
-               console.log("Attack Missed!");
+               console.log("Attack Missed!\n");
             }
             break;
          case "health potion":

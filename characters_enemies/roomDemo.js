@@ -12,7 +12,7 @@ let dmap = [
    [null, null]
 ];
 
-dmap[0][0] = new Room(0, null, dmap[1][0], dmap[0][1], null);
+dmap[0][0] = "nothing happens here lmao";
 dmap[1][0] = new Room(0.8, dmap[0][0], null, dmap[1][1], null);
 dmap[0][1] = new Room(0.3, null, dmap[1][1], null, dmap[0][0]);
 dmap[1][1] = new Room(0.5, dmap[0][1], null, null, dmap[1][0]);

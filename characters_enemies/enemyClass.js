@@ -32,7 +32,7 @@ class Enemy {
       let atk = Math.random() * 20;
       if (atk > character.armor) {
          character.hurt(this.damage);
-         //console.log("Enemy hits for " + this.damage + " points of damage!");
+         console.log("The " + this.type + " hits for " + this.damage + " points of damage!");
          if (this.condition != null) {
             switch(this.condition) {
                case "poison":
