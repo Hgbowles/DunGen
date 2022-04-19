@@ -23,7 +23,7 @@ class Character { // Object class for player characters
    }
 
    getClass() {
-      return this.getClass;
+      return this.class;
    }
 
    buff(hPlus, dPlus, aPlus) {
@@ -49,16 +49,16 @@ class Character { // Object class for player characters
       this.inventory.push(itemName);
    }
 
-   setWeapon(weapon){
-      switch(weapon) {
-         case 'greatsword':
-            this.damage = 18;
-         case 'longsword':
-            this.damage = 12;
-         case 'greataxe':
-            this.damage = 24;
-      }
-   }
+   // setWeapon(weapon){
+   //    switch(weapon) {
+   //       case 'greatsword':
+   //          this.damage = 18;
+   //       case 'longsword':
+   //          this.damage = 12;
+   //       case 'greataxe':
+   //          this.damage = 24;
+   //    }
+   // }
 
    setArmor(type){
       switch(type) {
@@ -130,7 +130,8 @@ class Character { // Object class for player characters
             }
             break;
          case "flee":
-            // END the game.
+            break;
+            // END the combat.
       }
    }
 }

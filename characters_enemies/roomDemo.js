@@ -4,7 +4,7 @@ const prompt = require('prompt-sync')();
 const Enemy = require('./enemyClass.js');
 
 
-let adventurer = new Hero("Randall Peterson", 35, 15, 12);
+let adventurer = new Hero("Randall Peterson","knight", 35, 15, 12);
 let enemy = new Enemy("goblin", 3, 7, 1);
 
 let dmap = [
@@ -12,10 +12,10 @@ let dmap = [
    [null, null]
 ];
 
-dmap[0][0] = "nothing happens here lmao";
+dmap[0][0] = new Room("start", null, dmap[1][0], dmap[0][1], null);
 dmap[1][0] = new Room(0.8, dmap[0][0], null, dmap[1][1], null);
-dmap[0][1] = new Room(0.3, null, dmap[1][1], null, dmap[0][0]);
-dmap[1][1] = new Room(0.5, dmap[0][1], null, null, dmap[1][0]);
+dmap[0][1] = new Room(0.9, null, dmap[1][1], null, dmap[0][0]);
+dmap[1][1] = new Room(1, dmap[0][1], null, null, dmap[1][0]);
 
 var playX = 0;
 var playY = 0;
@@ -24,13 +24,13 @@ let thisRoom = dmap[playY][playX];
 
 thisRoom.state = false;
 let gameEnd = false;
-var moved = false;
+var moved = true;
 
 // Begin the Demo
 console.log("\nrunning Demo\n");
 
-console.log("\n\nTo demonstrate the inventory system, the starting inventory of the player is: " + adventurer.inventory + "\n\n");
-
+console.log("\n\nTo demonstrate the character upgrade system, the starting armor and hp of the player is: " + adventurer.armor + " and " + adventurer.hp + "\n\n");
+   //thisRoom.generateRoom(adventurer, enemy);
    while (!gameEnd) {
          if (!moved) {
 
@@ -60,8 +60,12 @@ console.log("\n\nTo demonstrate the inventory system, the starting inventory of 
             } else {
                console.log("Invalid movement direction, please try again.");
             }
+
+            console.log("current room: "+ playX + ", " + playY);
             
          } else {
+            console.log("current room: "+ playX + ", " + playY);
+
             thisRoom.generateRoom(adventurer, enemy);
             moved = false;
             thisRoom.state = true;
@@ -72,7 +76,7 @@ console.log("\n\nTo demonstrate the inventory system, the starting inventory of 
          
       }
 
-      console.log("\n\nTo demonstrate the inventory system, the final inventory of the player is: " + adventurer.inventory + "\n\n");
+      console.log("\n\nTo demonstrate the character upgrade system, the final armor and hp of the player is: " + adventurer.armor + " and " + adventurer.hp + "\n\n");
 
       console.log("\n\nI wish there was more here for you, now that you've finished this demo, but this is all I've got at the moment.\n");
       console.log("Don't worry, more will be out soon, by next week I want to start adding in the randomizers to the things, and try using the bigger map in runner.js.\n");

@@ -22,8 +22,12 @@ class dunRoom {
       this.neighborS = south;
       this.neighborE = east;
       this.neighborW = west;
-      this.state = false;
-      //this.generateRoom();
+      this.state = (special == "start");
+      
+   }
+
+   getVal() {
+      return this.roomVal;
    }
 
    getSouth(){
@@ -42,9 +46,9 @@ class dunRoom {
    generateRoom(hero, enemy) { // creates a room based on the roomVal
       this.state = false;
 
-      console.log(this.roomVal);
+      //console.log(this.roomVal);
       
-      if (this.roomVal <= 0.2) {
+      if (this.roomVal <= 0.3) {
          this.roomType = "treasure";
          this.treasureGen(hero);
       } else if (this.roomVal <= 0.5) {
@@ -56,34 +60,39 @@ class dunRoom {
          this.puzzleTypeGen();
       } else if (this.roomVal == 0.9) {
          this.roomType = "library";
-         this.libraryLootGen();
+         this.libraryLootGen(hero);
       } else if (this.roomVal == 1) {
          this.roomType = "armory";
-         this.armoryLootGen();
+         this.armoryLootGen(hero);
       } else if (this.roomVal == 2) {
          this.roomType = "key";
          this.keyRoomGen();
       } else if (this.roomVal == 3) {
          this.roomType = "boss";
          this.bossRoomGen();
+      } else if (this.roomVal == "start") {
+         this.startRoomGen();
       }
+   }
+
+   startRoomGen() {
+      this.state = true;
+      console.log("There doesn't appear to be anything special in this room, it's just the entrance to the dungeon.\n");
    }
 
    puzzleTypeGen() {
       // generates a variety of simple puzzles/riddles to unlock the next rooms
-      //let puzzleType = Math.random();
 
       let puzzleType = Math.random();
 
-      if (puzzleType <= 0.3) {
+      if (puzzleType <= 0.5) {
          puzzleType = "riddle"; // there will be a pool of riddles chosen randomly, the player must answer correctly to pass (think like that part from The Hobbit)
          console.log("As you enter the next room, you see an inscription on the wall.\n");
          this.riddleGen();
-      } else if (puzzleType <= 0.6) {
+      } else if (puzzleType <= 1) {
          puzzleType = "numbers"; // there will be some simple number game, the player must win to pass
-      } else {
-         puzzleType = "TBD"; // unsure what this part will be, likely either trivia or something simple like that.
-      }
+         this.numGameGen();
+      } 
       
    }
 
@@ -143,12 +152,12 @@ class dunRoom {
             if (checkDanger.toLowerCase().trim() == 'y') {
                var checkRoll = Math.random() * 20;
                if (checkRoll > 10) {
-                  if (curChest.trap) {
+                  if (curChest.isTrapped()) {
                      console.log("This chest is definitely trapped!");
                      let disarm = prompt("Would you like to attempt to disarm the chest? Y or N ");
                      if (disarm.toLowerCase().trim() == 'y') {
                         let sleightOfHand = Math.random() * 20;
-                        if (slieghtOfHand > 13) {
+                        if (sleightOfHand > 13) {
                            curChest.trap = false;
                            console.log("You disarmed the trap!");
                         } else {
@@ -159,7 +168,7 @@ class dunRoom {
                      console.log("This chest is definitely safe!");
                   }
                } else {
-                  if (curChest.trap) {
+                  if (curChest.isTrapped()) {
                      console.log("You're pretty sure that chest is safe, I think?");
                   } else {
                      console.log("Now I'm no expert, but that chest looks like it may or may not be containing a trap of some variety.");
@@ -168,12 +177,7 @@ class dunRoom {
             }
             var openChest = prompt("Would you like to open the chest? Y or N ");
             if (openChest.toLowerCase().trim() == 'y') {
-               if (curChest.trap) {
-                  // activates trap, probably a small dart trap or something like that that does a little damage
-                  console.log("As you open the chest, a spike trap triggers!\n")
-                  hero.hurt(5);
-               } 
-               curChest.contents();
+               curChest.contents(hero);
                var loot = prompt("Will you take the items in the chest? Y or N ");
                if (loot.toLowerCase().trim() == 'y') {
                   for (let i = 0; i < curChest.healPots; i++) {
@@ -200,7 +204,7 @@ class dunRoom {
    libraryLootGen(hero) {
       // generates inventory loot for Mages (spell scrolls, magic buffs, etc.)
       console.log("As you enter the next room, you see towering bookshelves all around you. In the center of the room is a table with glowing runes. It appears you have found an arcane library!");
-      if (hero.getClass() == "mage") {
+      if (hero.class == "mage") {
          console.log("I bet you could get a lot stronger if you read some of the books in the library...\n");
          let buffYN = prompt("Will you take some time to get stronger? Y or N ");
          if (buffYN.toLowerCase().trim() == "y") {
@@ -216,7 +220,7 @@ class dunRoom {
    armoryLootGen(hero) {
       // generates inventory loot for Knights (weapons, armor, physical buffs, etc.)
       console.log("As you walk into the next room, the light of torches reflects off rows of armor and weapons, all new and shiny and waiting for an adventurer to take them. You found an armory!\n");
-      if (hero.getClass() == "knight") {
+      if (hero.class == "knight") {
          console.log("You know, you'd probably get a lot stronger if you took some of the gear here...\n");
          let buffYN = prompt("Will you take some time to get stronger? Y or N ");
          if (buffYN.toLowerCase().trim() == "y") {
@@ -325,6 +329,10 @@ class dunRoom {
             }
          }
       }  
+   }
+
+   numGameGen() {
+      console.log("I'm gonna put another type of puzzle here to add more variety to the room generation, I just haven't decided what to put yet.\n");
    }
 
 
