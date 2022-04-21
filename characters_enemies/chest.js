@@ -19,8 +19,9 @@ class Chest {
    contents(hero) {
       if (this.trap == true) {
          //this = new Enemy("Mimic", 10, 13, 5);
-         console.log("As you open the chest, you hear a slight *click* as a spike trap triggers!\n")
-         hero.hurt(5);
+         console.log("As you open the chest, you hear a slight *hiss* as a poison trap triggers!\n")
+         hero.setCon("poison");
+         console.log("You are now poisoned! Use an antidote to neutralize the poison!");
       } 
          this.gold = Math.floor(Math.random() * 10 + Math.random() * 100 + Math.random() * 1000);
          this.healPots = Math.floor(Math.random() * 10);

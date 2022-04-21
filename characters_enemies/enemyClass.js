@@ -19,8 +19,8 @@ class Enemy {
 
    hurt(points) {
       console.log("Enemy takes " + points + " points of damage!\n");
-      console.log("Enemy has " + this.hp + " Hit Points remaining!\n");
       this.hp -= points;
+      console.log("Enemy has " + this.hp + " Hit Points remaining!\n");
    }
 
    afflict(condition, character) {
@@ -43,6 +43,8 @@ class Enemy {
                   this.afflict(this.condition);
             }
          }
+      } else {
+         console.log("The " + this.type + " missed!");
       }
 
    }

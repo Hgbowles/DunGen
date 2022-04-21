@@ -23,6 +23,10 @@ class dunRoom {
       this.neighborE = east;
       this.neighborW = west;
       this.state = (special == "start");
+
+      this.easy = 0.5;
+      this.medium = 0.9;
+      this.hard = 1;
       
    }
 
@@ -43,6 +47,20 @@ class dunRoom {
       return this.neighborW;
    }
 
+   generateEnemy() {
+      let genVal = Math.random();
+      if (genVal <= this.easy) {
+         //goblin
+         this.enemy = new Enemy("goblin", 7, 15, 5);
+      } else if (genVal <= this.medium) {
+         //bugbear
+         this.enemy = new Enemy("bugbear", 27, 16, 11);
+      } else {
+         //"hard", Minotaur
+         this.enemy = new Enemy("minotaur", 76, 14, 17);
+      }
+   }
+
    generateRoom(hero, enemy) { // creates a room based on the roomVal
       this.state = false;
 
@@ -53,8 +71,8 @@ class dunRoom {
          this.treasureGen(hero);
       } else if (this.roomVal <= 0.5) {
          this.roomType = "encounter";
-         //this.combatGen(Math.random());
-         this.combat(hero, enemy);
+         this.generateEnemy();
+         this.combat(hero, this.enemy);
       } else if (this.roomVal <= 0.8) {
          this.roomType = "puzzle";
          this.puzzleTypeGen();
@@ -66,10 +84,10 @@ class dunRoom {
          this.armoryLootGen(hero);
       } else if (this.roomVal == 2) {
          this.roomType = "key";
-         this.keyRoomGen();
+         this.keyRoomGen(hero);
       } else if (this.roomVal == 3) {
          this.roomType = "boss";
-         this.bossRoomGen();
+         this.bossRoomGen(hero);
       } else if (this.roomVal == "start") {
          this.startRoomGen();
       }
@@ -126,16 +144,17 @@ class dunRoom {
       let numChests = Math.round(Math.random() * 5);
       var curChest;
 
-      let numTrapped = Math.round(Math.random() * numChests);
+      let numTrapped = Math.round(Math.random()) * numChests;
       let numSafe = numChests - numTrapped;
 
       console.log("You enter a room with some chests...\n");
       console.log("As for now, the room has " + numChests + " chests in it.\n");
       var action = '';
       while (action.toLowerCase().trim() != 'exit' && numChests > 0) {
-         action = prompt("What would you like to do? Will you search the chests or exit the room? ");
+         action = prompt("What would you like to do? Will you [SEARCH] the chests or [EXIT] the room? ");
          if (action.toLowerCase().trim() == 'search') {
-            let chestVal = (Math.random() * 10) % 2;
+            let chestVal = Math.round((Math.random() * 10) % 2);
+            console.log(chestVal);
 
             if (chestVal == 0 && numSafe > 0 || numTrapped == 0) {
                curChest = new Chest(false);
@@ -152,7 +171,7 @@ class dunRoom {
             if (checkDanger.toLowerCase().trim() == 'y') {
                var checkRoll = Math.random() * 20;
                if (checkRoll > 10) {
-                  if (curChest.isTrapped()) {
+                  if (curChest.isTrapped() == true) {
                      console.log("This chest is definitely trapped!");
                      let disarm = prompt("Would you like to attempt to disarm the chest? Y or N ");
                      if (disarm.toLowerCase().trim() == 'y') {
@@ -210,7 +229,10 @@ class dunRoom {
          if (buffYN.toLowerCase().trim() == "y") {
             console.log("As you read the books around you, you can feel the magical energy flowing through you, and you can feel it becoming greater than before!\n");
             hero.buff(50, 20, 5);
-            console.log("Your hp, damage, and armor have all increased!");
+            this.hard -= 0.3; // update the difficulty each time the player "levels up"
+            this.medium -= 0.4;
+            this.easy -= 0.2;
+            console.log("Your hp, damage, and armor have all increased! I wouldn't be surprised if the enemies start getting stronger too...");
          }
       } else {
          console.log("The books here look pretty neat, but I don't think you'd learn anything from it.\n");
@@ -226,7 +248,10 @@ class dunRoom {
          if (buffYN.toLowerCase().trim() == "y") {
             console.log("As you look around the armory, you find some new armor and a grindstone to sharpen your sword!\n");
             hero.buff(80, 25, 5);
-            console.log("Your hp, damage, and armor have all increased!");
+            this.hard -= 0.3; // update the difficulty each time the player "levels up"
+            this.medium -= 0.4;
+            this.easy -= 0.2;
+            console.log("Your hp, damage, and armor have all increased! I wouldn't be surprised if the enemies start getting stronger too...");
          } 
       } else {
          console.log("The stuff in here sure is shiny, but martial weapons aren't really your style.\n");
@@ -242,6 +267,11 @@ class dunRoom {
       if (hero.hp > 0) {
          console.log("To the winner go the spoils, you collect the gold from the dragon's hoard, about 50000 pieces in total.\n");
          hero.addGold(50000);
+         console.log("Among the treasure you find an ULTIMATE HEALTH POTION. It looks too heavy to carry with you, but you can drink it here if you wish.");
+         let heal = prompt("Will you drink the ULTIMATE HEALING POTION? Y or N: ");
+         if (heal.toLowerCase().trim() == 'y') {
+            hero.heal(hero.maxHp);
+         }
       }
    }
 
@@ -250,7 +280,7 @@ class dunRoom {
 
       console.log("An angry " + monster.type + " attacks! Combat START!");
       while(hero.hp > 0 && monster.hp > 0) {
-         let act = prompt("What will you do, hero? You can FIGHT, USE ITEM, or FLEE ");
+         let act = prompt("What will you do, hero? You can FIGHT, use a HEALTH POTION or ANTIDOTE, or FLEE ");
             if (act.toLowerCase().trim() == "flee"){
                monster.hurt(1000);
                fled = true;
@@ -265,21 +295,18 @@ class dunRoom {
       if (fled) {
          console.log("You fled from the " + monster.type + ".\n");
          console.log("I mean, I guess that was always an option, but really?\n");
-         console.log("Either way, the demo's over now, I guess.\n");
+         //console.log("Either way, the demo's over now, I guess.\n");
          console.log("Feel free to play again if you want.\n");
       } else if (hero.hp > 0){
          console.log("Congratulations, " + hero.name + "! You defeated the " + monster.type + "!\n");
-         //console.log("To the winner go the spoils, you collect the gold from the dragon's hoard, about 50000 pieces in total.\n");
-         //hero.addGold(50000);
-         //console.log("Having defeated the mighty beast, you have completed the RanDungeon! Congratulations, " + hero.name + "! Feel free to play again for another unique RanDungeon experience!\n");
       } else if (hero.hp <= 0){
          console.log("Unfortunately, you were defeated by the " + monster.type + ".\n");
-         console.log("If this were the full game, you would get a \"Game Over\" screen here and be sent back to the atart with character creation.\n");
-         console.log("However, this is not a full game yet, so all you get is this message and a sense of defeat.\n");
+         console.log("Since this is the full game, Here is your \"Game Over\" screen.\n");
+         console.log("Feel free to try again!\n");
       }
    }
 
-   keyRoomGen() {
+   keyRoomGen(hero) {
       //
       console.log("The room before you is almost completely empty.\n");
       console.log("All you can see is a single chest in the center of the room.\n");
