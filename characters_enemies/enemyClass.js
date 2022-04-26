@@ -9,12 +9,13 @@ class Enemy {
       this.maxHp = maxHp;
       this.armor = armor;
       this.damage = damage;
-      this.condition = null;
-      if (creatureType == "giant spider") {
-         this.condition = "poison";
-      } else if (creatureType == "minotaur") {
-         this.condition = "prone";
-      }
+      // this.condition = null;
+      // if (creatureType == "giant spider") {
+      //    this.condition = "poison";
+      // } else if (creatureType == "minotaur") {
+      //    this.condition = "prone";
+      // }
+      // Ended up not implemnting these yet, may bring them back another time
    }
 
    hurt(points) {
