@@ -51,10 +51,10 @@ class dunRoom {
       let genVal = Math.random();
       if (genVal <= this.easy) {
          //goblin
-         this.enemy = new Enemy("goblin", 7, 15, 5);
+         this.enemy = new Enemy("goblin", 7, 12, 5);
       } else if (genVal <= this.medium) {
          //bugbear
-         this.enemy = new Enemy("bugbear", 27, 16, 11);
+         this.enemy = new Enemy("bugbear", 27, 13, 11);
       } else {
          //"hard", Minotaur
          this.enemy = new Enemy("minotaur", 76, 14, 17);

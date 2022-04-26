@@ -91,7 +91,7 @@ function main() {
 
    var moved = true;
    let gameEnd = false;
-   map[playerX][playerY].state = false;
+   //map[playerX][playerY].state = false;
 
    console.log("You find yourself in an empty room, with doors pointing east and south. \nThe doors are unlocked, but you are unable to see into either room without entering.\n");
 
@@ -186,9 +186,11 @@ function main() {
             }
          
          } else {
-            map[playerX][playerY].generateRoom(hero, enemy);
+            if (map[playerX][playerY].state == false) {
+               map[playerX][playerY].generateRoom(hero, enemy);
+               map[playerX][playerY].state = true;
+            }
             moved = false;
-            map[playerX][playerY].state = true;
          }
 
          if (hero.condition == 'poison') {
