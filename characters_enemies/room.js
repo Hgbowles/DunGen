@@ -63,8 +63,6 @@ class dunRoom {
 
    generateRoom(hero, enemy) { // creates a room based on the roomVal
       this.state = false;
-
-      //console.log(this.roomVal);
       
       if (this.roomVal <= 0.3) {
          this.roomType = "treasure";
@@ -154,7 +152,6 @@ class dunRoom {
          action = prompt("What would you like to do? Will you [SEARCH] the chests or [EXIT] the room? ");
          if (action.toLowerCase().trim() == 'search') {
             let chestVal = Math.round((Math.random() * 10) % 2);
-            console.log(chestVal);
 
             if (chestVal == 0 && numSafe > 0 || numTrapped == 0) {
                curChest = new Chest(false);

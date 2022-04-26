@@ -98,7 +98,7 @@ function main() {
    do {
          if (!moved) {
 
-            let move = prompt("Which way would you like to go? Enter a direction to enter that room. You can also check the map if you want by entering \"MAP\". " );
+            let move = prompt("Which way would you like to go? Enter a direction to enter that room. You can also check the map if you want by entering \"MAP\", or \"USE ITEM\" to access the inventory and heal or cure poison. " );
 
             if (move.toLowerCase().trim() == "south" && playerY < map.length - 1){
                if (map[playerX][playerY + 1].getVal() == 3) {
@@ -195,7 +195,6 @@ function main() {
             hero.hurt(1);
             console.log("You feel the poison slowly draining your energy. You should find an antidote soon.");
          }
-      
    }    while (hero.hp > 0 && !gameEnd);
 }
 
