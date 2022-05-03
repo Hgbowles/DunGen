@@ -1,4 +1,4 @@
-# js_game
+# DunGen
 
 DunGen is a randomly generated dungeon crawler-type RPG, presented as a text-based game with a similar style to The Binding of Isaac with Dungeons and Dragons monsters.
 
