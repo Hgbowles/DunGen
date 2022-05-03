@@ -85,7 +85,7 @@ function main() {
    
 
       if (pClass.toLowerCase().trim() == "knight") {
-         hero = new Player(name, "knight", 20, 13, 10);
+         hero = new Player(name, "knight", 20, 14, 10);
       } else if (pClass.toLowerCase().trim() == "mage") {
          hero = new Player(name, "mage", 15, 10, 20);
       } else {
@@ -111,7 +111,6 @@ function main() {
          if (!moved) {
 
             let move = prompt("Which way would you like to go? Enter a direction to enter that room. You can also check the map if you want by entering \"MAP\", or \"USE ITEM\" to access the inventory and heal or cure poison. " );
-            console.log(playerX);
             
 
             if (move.toLowerCase().trim() == "south" && playerY < map[0].length - 1){
@@ -177,7 +176,7 @@ function main() {
                console.log(mapString);
                console.log("\nX = You Are Here");
             }  else if (move.toLowerCase().trim() == "use item") {
-               console.log("Which item will you use?");
+               console.log("Which item will you use? ");
                itemName = prompt("You currently have " + hero.numHeal + " HEALTH POTIONs and " + hero.numAnt + " ANTIDOTEs.");
                switch(itemName.toLowerCase().trim()) {
                   case 'health potion':
@@ -221,6 +220,8 @@ function main() {
                }
             }
             moved = false;
+            console.log(playerY);
+
          }
 
          if (hero.condition == 'poison') {

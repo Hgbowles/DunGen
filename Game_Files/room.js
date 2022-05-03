@@ -216,8 +216,8 @@ class dunRoom {
       // generates inventory loot for Mages (spell scrolls, magic buffs, etc.)
       console.log("As you enter the next room, you see towering bookshelves all around you. In the center of the room is a table with glowing runes. It appears you have found an arcane library!");
       if (hero.class == "mage") {
-         console.log("I bet you could get a lot stronger if you read some of the books in the library...\n");
-         let buffYN = prompt("Will you take some time to get stronger? Y or N ");
+         console.log("I bet you could get a lot more powerful if you read some of the books in the library...\n");
+         let buffYN = prompt("Will you take some time to get more powerful? Y or N ");
          if (buffYN.toLowerCase().trim() == "y") {
             console.log("As you read the books around you, you can feel the magical energy flowing through you, and you can feel it becoming greater than before!\n");
             hero.buff(50, 20, 5);
@@ -246,7 +246,7 @@ class dunRoom {
             console.log("Your hp, damage, and armor have all increased! I wouldn't be surprised if the enemies start getting stronger too...");
          } 
       } else {
-         console.log("The stuff in here sure is shiny, but martial weapons aren't really your style.\n");
+         console.log("The stuff in here sure is shiny, but melee weapons aren't really your style.\n");
       }
    }
 
