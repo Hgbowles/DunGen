@@ -11,13 +11,7 @@ class dunRoom {
    
 
    constructor(special, north, south, east, west) { //special constructor, only occurs once per room type
-      if (special == "key") {
-         this.roomVal = 2;
-      } else if (special == "boss") {
-         this.roomVal = 3;
-      } else {
-         this.roomVal = special; // provide a Math.random() number
-      }
+      this.roomVal = special;
       this.neighborN = north; //each room may have up to 4 neighbor rooms, but must have at least one neighbor.
       this.neighborS = south;
       this.neighborE = east;
@@ -27,6 +21,7 @@ class dunRoom {
       this.easy = 0.5;
       this.medium = 0.9;
       this.hard = 1;
+      this.fled = false;
       
    }
 
@@ -51,7 +46,7 @@ class dunRoom {
       let genVal = Math.random();
       if (genVal <= this.easy) {
          //goblin
-         this.enemy = new Enemy("goblin", 7, 12, 5);
+         this.enemy = new Enemy("goblin", 7, 10, 5);
       } else if (genVal <= this.medium) {
          //bugbear
          this.enemy = new Enemy("bugbear", 27, 13, 11);
@@ -261,7 +256,7 @@ class dunRoom {
       let boss = new Enemy("dragon", 150, 17, 20);
       let bossTreasure = 50000;
       this.combat(hero, boss);
-      if (hero.hp > 0) {
+      if (hero.hp > 0 && this.fled == false) {
          console.log("To the winner go the spoils, you collect the gold from the dragon's hoard, about 50000 pieces in total.\n");
          hero.addGold(50000);
          console.log("Among the treasure you find an ULTIMATE HEALTH POTION. It looks too heavy to carry with you, but you can drink it here if you wish.");
@@ -273,14 +268,14 @@ class dunRoom {
    }
 
    combat(hero, monster) {
-      var fled = false;
+      this.fled = false;
 
       console.log("An angry " + monster.type + " attacks! Combat START!");
-      while(hero.hp > 0 && monster.hp > 0) {
+      while(hero.hp > 0 && monster.hp > 0 && !this.fled) {
          let act = prompt("What will you do, hero? You can FIGHT, use a HEALTH POTION or ANTIDOTE, or FLEE ");
             if (act.toLowerCase().trim() == "flee"){
                //monster.hurt(1000);
-               fled = true;
+               this.fled = true;
             } else {
                
                hero.action(act, monster);
@@ -289,11 +284,11 @@ class dunRoom {
                monster.attack(hero); 
             }      
       }
-      if (fled) {
+      if (this.fled) {
          console.log("You fled from the " + monster.type + ".\n");
          console.log("I mean, I guess that was always an option, but really?\n");
          //console.log("Either way, the demo's over now, I guess.\n");
-         console.log("Feel free to play again if you want.\n");
+         //console.log("Feel free to play again if you want.\n");
       } else if (hero.hp > 0){
          console.log("Congratulations, " + hero.name + "! You defeated the " + monster.type + "!\n");
       } else if (hero.hp <= 0){

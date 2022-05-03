@@ -11,7 +11,7 @@ Players can choose their class, receive an inventory, and be sent into the dunge
 
 The player will be prompted to build a character at the start, selecting a name and class. furter character upgrades may be found in the dungeon.
 
-Each room after the starting room is randomly generated, but the map will always consist of a 3x5 rectangle of rooms.
+Each room after the starting room is randomly generated, but the map will always consist of a 3x3 square of rooms.
 
 Players may move in any cardinal direction (North, South, East, West), look at the map, access their inventory, or exit the dungeon at any point between rooms. 
 
@@ -21,4 +21,4 @@ There will be a locked room with a "boss" monster in it, which the players must 
 
 Other rooms include the Armory and Arcane Library for character upgrades, the treasure room with chests for loot that may be trapped, encounter rooms with monsters of varying difficulty, and a variety of puzzle rooms that may ask riddles or require the player to solve other challenges.
 
-As of right now, there is a bug where the game will not allow players to access the third and fourth rows of rooms, but I am working on fixing that.
+As of right now, player movement between rooms is experiencing a bug where it will either not allow valid movements or move the player into the Boss Room without the key, neither of which should be happening. Such problems are being addressed and will be resolved ASAP.

@@ -38,16 +38,19 @@ function main() {
    let map = [ // a 3x5 2-D array of rooms, the starting room at [0][0], all other rooms are randomly generated.
       [null, null, null],
       [null, null, null],
-      [null, null, null],
-      [null, null, null],
       [null, null, null]
+      // [null, null, null],
+      // [null, null, null]
    ]; 
 
-   var bossRoom = (Math.random() * 10) % 14; // randomly generate locations for boss and key
-   var keyRoom = (Math.random() * 10) % 14;
+   var bossRoom = Math.round((Math.random() * 10) % 8); // randomly generate locations for boss and key
+   var keyRoom = Math.round((Math.random() * 10) % 8);
    while (keyRoom == bossRoom) {
-      keyRoom = (Math.random() * 10) % 14;  // make sure the boss and key room are different rooms
+      keyRoom = Math.round((Math.random() * 10) % 8);  // make sure the boss and key room are different rooms
    }
+
+   console.log(keyRoom);
+   console.log(bossRoom);
 
    // build the rooms, I'll have to implement checks for boss and key rooms, as well as lock the boss room until the player has the key
    // that will be for next week
@@ -59,15 +62,15 @@ function main() {
    map[1][0] = buildRoom(2, keyRoom, bossRoom, map[0][0], map[2][0], map[1][1], null);
    map[1][1] = buildRoom(3, keyRoom, bossRoom, map[0][1], map[2][1], map[1][2], map[1][0]);
    map[1][2] = buildRoom(4, keyRoom, bossRoom, map[0][2], map[2][2], null, map[1][1]);
-   map[2][0] = buildRoom(5, keyRoom, bossRoom, map[1][0], map[3][0], map[2][1], null);
-   map[2][1] = buildRoom(6, keyRoom, bossRoom, map[1][1], map[3][1], map[2][2], map[2][0]);
-   map[2][2] = buildRoom(7, keyRoom, bossRoom, map[1][2], map[3][2], null, map[2][1])
-   map[3][0] = buildRoom(8, keyRoom, bossRoom, map[2][0], map[3][0], map[3][1], null);
-   map[3][1] = buildRoom(9, keyRoom, bossRoom, map[2][1], map[4][1], map[3][2], map[3][0]);
-   map[3][2] = buildRoom(10, keyRoom, bossRoom, map[2][2], map[4][2], null, map[3][1]);
-   map[4][0] = buildRoom(11, keyRoom, bossRoom, map[3][0], null, map[4][1], null);
-   map[4][1] = buildRoom(12, keyRoom, bossRoom, map[3][1], null, map[4][2], map[4][0]);
-   map[4][2] = buildRoom(13, keyRoom, bossRoom, map[3][2], null, null, map[4][1]);
+   map[2][0] = buildRoom(5, keyRoom, bossRoom, map[1][0], null, map[2][1], null);
+   map[2][1] = buildRoom(6, keyRoom, bossRoom, map[1][1], null, map[2][2], map[2][0]);
+   map[2][2] = buildRoom(7, keyRoom, bossRoom, map[1][2], null, null, map[2][1])
+   // map[3][0] = buildRoom(8, keyRoom, bossRoom, map[2][0], map[3][0], map[3][1], null);
+   // map[3][1] = buildRoom(9, keyRoom, bossRoom, map[2][1], map[4][1], map[3][2], map[3][0]);
+   // map[3][2] = buildRoom(10, keyRoom, bossRoom, map[2][2], map[4][2], null, map[3][1]);
+   // map[4][0] = buildRoom(11, keyRoom, bossRoom, map[3][0], null, map[4][1], null);
+   // map[4][1] = buildRoom(12, keyRoom, bossRoom, map[3][1], null, map[4][2], map[4][0]);
+   // map[4][2] = buildRoom(13, keyRoom, bossRoom, map[3][2], null, null, map[4][1]);
 
    let name = prompt("What is your name, adventurer, that we might know who you are when you achieve greatness? ");
 
@@ -82,9 +85,9 @@ function main() {
    
 
       if (pClass.toLowerCase().trim() == "knight") {
-         hero = new Player(name, "knight", 20, 13, 6);
+         hero = new Player(name, "knight", 20, 13, 10);
       } else if (pClass.toLowerCase().trim() == "mage") {
-         hero = new Player(name, "mage", 10, 10, 13);
+         hero = new Player(name, "mage", 15, 10, 20);
       } else {
          console.log("Sorry, I don't think that's one of the options for a class. try again.")
    }
@@ -108,9 +111,11 @@ function main() {
          if (!moved) {
 
             let move = prompt("Which way would you like to go? Enter a direction to enter that room. You can also check the map if you want by entering \"MAP\", or \"USE ITEM\" to access the inventory and heal or cure poison. " );
+            console.log(playerX);
+            
 
-            if (move.toLowerCase().trim() == "south" && playerY < map.length - 1){
-               if (map[playerY][playerX + 1].getVal() == 3) {
+            if (move.toLowerCase().trim() == "south" && playerY < map[0].length - 1){
+               if (map[playerY][playerX + 1].getVal() == '3') {
                   if (hero.hasKey) {
                      playerX++;
                      moved = true;
@@ -121,8 +126,8 @@ function main() {
                   playerX++;
                   moved = true;
                }
-            } else if (move.toLowerCase().trim() == "east" && playerX < map[0].length - 1) {
-               if (map[playerY + 1][playerX].getVal() == 3) {
+            } else if (move.toLowerCase().trim() == "east" && playerX < map.length - 1) {
+               if (map[playerY + 1][playerX].getVal() == '3') {
                   if (hero.hasKey) {
                      playerY++;
                      moved = true;
@@ -134,7 +139,7 @@ function main() {
                   moved = true;
                }
             } else if (move.toLowerCase().trim() == "north" && playerY > 0) {
-               if (map[playerY][playerX - 1].getVal() == 3) {
+               if (map[playerY][playerX - 1].getVal() == '3') {
                   if (hero.hasKey) {
                      playerX--;
                      moved = true;
@@ -146,7 +151,7 @@ function main() {
                   moved = true;
                }
             } else if (move.toLowerCase().trim() == "west" && playerX > 0) {
-               if (map[playerY - 1][playerX].getVal() == 3) {
+               if (map[playerY - 1][playerX].getVal() == '3') {
                   if (hero.hasKey) {
                      playerY--;
                      moved = true;
@@ -198,6 +203,22 @@ function main() {
             if (map[playerX][playerY].state == false) {
                map[playerX][playerY].generateRoom(hero, enemy);
                map[playerX][playerY].state = true;
+               if (map[playerX][playerY].fled) {
+                  switch(move.toLowerCase().trim()) {
+                     case "south":
+                        playerX--;
+                        break;
+                     case "north":
+                        playerX++;
+                        break;
+                     case "east":
+                        playerY--;
+                        break;
+                     case "west":
+                        playerY++;
+                        break;
+                  }
+               }
             }
             moved = false;
          }
