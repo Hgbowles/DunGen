@@ -8,6 +8,8 @@ This game was developed as a self-led project for ISAT252, SP22 at James Madison
 
 This project really let me delve into my own interests and see what kind of ideas I could think of, as well as overcome the obstacles in the writing process. 
 
+To run the project, clone the repository to your machine and open the runner.js file. This is the file that starts the game and activates the other object classes. When you are ready to start, run this file.
+
 There are two classes that each have advantages and disadvantages: the damage-soaking knight and the glass-cannon mage.
 
 Players can choose their class, receive an inventory, and be sent into the dungeon.
