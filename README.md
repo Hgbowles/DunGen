@@ -31,4 +31,4 @@ There is a locked room with a "boss" monster in it, which the players must find 
 
 Other rooms include the Armory and Arcane Library for character upgrades, the treasure room with chests for loot that may be trapped, encounter rooms with monsters of varying difficulty, and a variety of puzzle rooms that may ask riddles or require the player to solve other challenges.
 
-As of right now, player movement between rooms is experiencing a bug where it will either not allow valid movements or move the player into the Boss Room without the key, neither of which should be happening. Such problems are being addressed and will be resolved ASAP.
+As of right now, there is a bug where the player will enter the Boss room when they are not adjacent to it and/or not entering said room. Such problems are being addressed and will be resolved ASAP.

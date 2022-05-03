@@ -111,10 +111,10 @@ function main() {
          if (!moved) {
 
             let move = prompt("Which way would you like to go? Enter a direction to enter that room. You can also check the map if you want by entering \"MAP\", or \"USE ITEM\" to access the inventory and heal or cure poison. " );
-            
+            console.log(move);
 
-            if (move.toLowerCase().trim() == "south" && playerY < map[0].length - 1){
-               if (map[playerY][playerX + 1].getVal() == '3') {
+            if (move.toLowerCase().trim() == "south" && playerY < map[0].length){
+               if (map[playerY][playerX + 1].isBoss) {
                   if (hero.hasKey) {
                      playerX++;
                      moved = true;
@@ -125,8 +125,8 @@ function main() {
                   playerX++;
                   moved = true;
                }
-            } else if (move.toLowerCase().trim() == "east" && playerX < map.length - 1) {
-               if (map[playerY + 1][playerX].getVal() == '3') {
+            } else if (move.toLowerCase().trim() == "east" && playerX < map.length) {
+               if (map[playerY + 1][playerX].isBoss) {
                   if (hero.hasKey) {
                      playerY++;
                      moved = true;
@@ -138,7 +138,7 @@ function main() {
                   moved = true;
                }
             } else if (move.toLowerCase().trim() == "north" && playerY > 0) {
-               if (map[playerY][playerX - 1].getVal() == '3') {
+               if (map[playerY][playerX - 1].isBoss) {
                   if (hero.hasKey) {
                      playerX--;
                      moved = true;
@@ -150,7 +150,7 @@ function main() {
                   moved = true;
                }
             } else if (move.toLowerCase().trim() == "west" && playerX > 0) {
-               if (map[playerY - 1][playerX].getVal() == '3') {
+               if (map[playerY - 1][playerX].isBoss) {
                   if (hero.hasKey) {
                      playerY--;
                      moved = true;

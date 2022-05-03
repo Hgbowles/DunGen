@@ -18,6 +18,8 @@ class dunRoom {
       this.neighborW = west;
       this.state = (special == "start");
 
+      this.isBoss = (special == 3);
+
       this.easy = 0.5;
       this.medium = 0.9;
       this.hard = 1;
