@@ -71,16 +71,25 @@ function main() {
 
    let name = prompt("What is your name, adventurer, that we might know who you are when you achieve greatness? ");
 
-   let pClass = prompt("What kind of adventurer are you? Are you a Mage, or are you a Knight? ");
-
    var hero;
    var enemy;
+   var pClass;
 
-   if (pClass.toLowerCase().trim() == "knight") {
-      hero = new Player(name, "knight", 20, 13, 6);
-   } else if (pClass.toLowerCase().trim() == "mage") {
-      hero = new Player(name, "mage", 10, 10, 13);
+   do {
+
+      pClass = prompt("What kind of adventurer are you? Are you a Mage, or are you a Knight? ");
+
+   
+
+      if (pClass.toLowerCase().trim() == "knight") {
+         hero = new Player(name, "knight", 20, 13, 6);
+      } else if (pClass.toLowerCase().trim() == "mage") {
+         hero = new Player(name, "mage", 10, 10, 13);
+      } else {
+         console.log("Sorry, I don't think that's one of the options for a class. try again.")
    }
+
+} while (pClass.toLowerCase().trim() != "knight" && pClass.toLowerCase().trim() != "mage")
 
    console.log("Welcome, " + name + ", to DunGen, a randomly generated Dungeon Crawling Experience.\n");
    console.log("You may explore the dungeon in any method you like, and you may encounter a variety of different rooms and challenges.\n");
@@ -101,43 +110,31 @@ function main() {
             let move = prompt("Which way would you like to go? Enter a direction to enter that room. You can also check the map if you want by entering \"MAP\", or \"USE ITEM\" to access the inventory and heal or cure poison. " );
 
             if (move.toLowerCase().trim() == "south" && playerY < map.length - 1){
-               if (map[playerX][playerY + 1].getVal() == 3) {
-                  if (hero.hasKey) {
-                     playerY++;
-                     moved = true;
-                  }  else {
-                     console.log("This door seems locked. It looks like you need a key.\n");
-                  }
-               } else {
-                  playerY++;
-                  moved = true;
-               }
-            } else if (move.toLowerCase().trim() == "east" && playerX < map[0].length - 1) {
-               if (map[playerX + 1][playerY].getVal() == 3) {
+               if (map[playerY][playerX + 1].getVal() == 3) {
                   if (hero.hasKey) {
                      playerX++;
                      moved = true;
-                  } else {
+                  }  else {
                      console.log("This door seems locked. It looks like you need a key.\n");
                   }
                } else {
                   playerX++;
                   moved = true;
                }
-            } else if (move.toLowerCase().trim() == "north" && playerY > 0) {
-               if (map[playerX][playerY - 1].getVal() == 3) {
+            } else if (move.toLowerCase().trim() == "east" && playerX < map[0].length - 1) {
+               if (map[playerY + 1][playerX].getVal() == 3) {
                   if (hero.hasKey) {
-                     playerY--;
+                     playerY++;
                      moved = true;
                   } else {
                      console.log("This door seems locked. It looks like you need a key.\n");
                   }
                } else {
-                  playerY--;
+                  playerY++;
                   moved = true;
                }
-            } else if (move.toLowerCase().trim() == "west" && playerX > 0) {
-               if (map[playerX - 1][playerY].getVal() == 3) {
+            } else if (move.toLowerCase().trim() == "north" && playerY > 0) {
+               if (map[playerY][playerX - 1].getVal() == 3) {
                   if (hero.hasKey) {
                      playerX--;
                      moved = true;
@@ -148,11 +145,23 @@ function main() {
                   playerX--;
                   moved = true;
                }
+            } else if (move.toLowerCase().trim() == "west" && playerX > 0) {
+               if (map[playerY - 1][playerX].getVal() == 3) {
+                  if (hero.hasKey) {
+                     playerY--;
+                     moved = true;
+                  } else {
+                     console.log("This door seems locked. It looks like you need a key.\n");
+                  }
+               } else {
+                  playerY--;
+                  moved = true;
+               }
             } else if (move.toLowerCase().trim() == "map") {
                var mapString = "";
                for (let i = 0; i < map.length; i++) {
                   for (let j = 0; j < map[0].length; j++) {
-                     if (playerX == j && playerY == i) {
+                     if (playerX == i && playerY == j) {
                         mapString += "[X]";
                      } else {
                         mapString += "[ ]";

@@ -279,7 +279,7 @@ class dunRoom {
       while(hero.hp > 0 && monster.hp > 0) {
          let act = prompt("What will you do, hero? You can FIGHT, use a HEALTH POTION or ANTIDOTE, or FLEE ");
             if (act.toLowerCase().trim() == "flee"){
-               monster.hurt(1000);
+               //monster.hurt(1000);
                fled = true;
             } else {
                
@@ -356,7 +356,19 @@ class dunRoom {
    }
 
    numGameGen() {
-      console.log("I'm gonna put another type of puzzle here to add more variety to the room generation, I just haven't decided what to put yet.\n");
+      console.log("You see a series of numbers and symbols inscribed on the wall. They read as follows: ");
+      console.log("\n1 + 4 = 5\n2 + 5 = 12\n3 + 6 = 21\n8 + 11 = ?");
+      console.log("It looks like a number puzzle of some sort.");
+      let solved = false;
+      while (!solved) {
+         var guess = prompt("Any idea what the solution could be? ");
+         if (guess.toLowerCase().trim() == 40) {
+            solved = true;
+            console.log("The door opens with a loud *THUNK*...");
+            console.log("You solved the riddle!");
+         }
+      }
+      //console.log("I'm gonna put another type of puzzle here to add more variety to the room generation, I just haven't decided what to put yet.\n");
    }
 
 
